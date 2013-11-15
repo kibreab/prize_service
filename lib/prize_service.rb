@@ -16,6 +16,7 @@ class PrizeService
 
 		begin
    			response = Net::HTTP.post_form(url, param) #Requesting the API :expecting a successful response in a format ..eg { result: { eligibility: true } } 
+   			elsif response[:result]
    				if response[:result][:eligibility] == true
    					return Eligibility.eligibility(customersChannelPackages) # A place to calculate the eligibility given the channel info, since true is responded
    				else
